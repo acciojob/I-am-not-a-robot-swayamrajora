@@ -24,10 +24,11 @@ function getImageClass(src) {
   if (src.includes("id/237")) return "img1";
   if (src.includes("seed/picsum")) return "img2";
   if (src.includes("grayscale")) return "img3";
-  if (src.includes("200/300/\"")) return "img4"; // This one may not match well, see note below
+  if (src === "https://picsum.photos/200/300/") return "img4"; // Fixed this line
   if (src.includes("200/300.jpg")) return "img5";
   return "";
 }
+
 
 // Load images
 function loadImages() {
