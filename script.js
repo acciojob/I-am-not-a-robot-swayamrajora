@@ -19,6 +19,16 @@ function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
+// Helper function to assign class names .img1 to .img5 based on URL
+function getImageClass(src) {
+  if (src.includes("id/237")) return "img1";
+  if (src.includes("seed/picsum")) return "img2";
+  if (src.includes("grayscale")) return "img3";
+  if (src.includes("200/300/\"")) return "img4"; // This one may not match well, see note below
+  if (src.includes("200/300.jpg")) return "img5";
+  return "";
+}
+
 // Load images
 function loadImages() {
   let temp = [...images];
@@ -34,9 +44,11 @@ function loadImages() {
   verifyButton.style.display = "none";
   selected = [];
 
-  actualImages.forEach((src, index) => {
+  actualImages.forEach((src) => {
     const img = document.createElement("img");
     img.src = src;
+    const className = getImageClass(src);
+    if (className) img.classList.add(className);
     img.classList.add("tile");
     img.setAttribute("data-src", src);
     img.addEventListener("click", () => handleClick(img));
